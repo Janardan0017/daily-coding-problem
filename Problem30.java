@@ -1,8 +1,37 @@
 public class Problem30{
 
+	public static int getValume(int[] height){
+		int n = height.length;
+		if(n < 3){
+			return 0;
+		}
+		int result = 0;
+		for(int i=1; i<n-1; i++){
+			int l = i-1;
+			int r = i+1;
+			int maxL = height[l];
+			int maxR = height[r];
+			while(l >= 0){
+				maxL = Math.max(maxL, height[l]);
+				l--;
+			}
+			while(r < n){
+				maxR = Math.max(maxR, height[r]);
+				r++;
+			}
+			int min = Math.min(maxL, maxR);
+			if(min > height[i]){
+				result += (min - height[i]);
+			}
+		}
+		return result;
+	}
+
 	public static void main(String[] args){
 
-		
+		int[] height = {2, 0, 2};
+		int result = getValume(height);
+		System.out.println(result);
 
 	}
 }
